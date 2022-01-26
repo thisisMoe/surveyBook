@@ -1,0 +1,19 @@
+{
+  "name": "surveybook",
+  "version": "1.0.0",
+  "description": "Anon. survey book",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
+  },
+  "author": "Sidi Mohammed Bounoua",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
