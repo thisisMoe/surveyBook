@@ -8,7 +8,7 @@
       bg-white
       shadow-lg
       rounded-lg
-      my-12
+
       flex flex-col
       justify-between
     "

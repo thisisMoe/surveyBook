@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Survey from '../views/Survey.vue'
 import Result from '../views/Result.vue'
+import NotFound from '../views/NotFound.vue'
 
 const routes = [
   {
@@ -21,6 +22,8 @@ const routes = [
     component: Result,
     props: true
   },
+  { path: '/404', component: NotFound },  
+  { path: "/:catchAll(.*)", redirect: '/404' },  
   {
     path: '/create',
     name: 'Create',

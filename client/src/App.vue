@@ -2,7 +2,7 @@
   <div class="px-6 md:px-10 pb-10 pt-4 h-full">
     <h1 class="text-5xl mb-16 mt-8">Survey Book</h1>
 
-    <div id="nav">
+    <div id="nav" class="mb-8">
       <div class="border-b-2">
         <div class="flex cursor-pointer justify-center gap-4">
           <router-link active-class="bg-white text-gray-700" class="py-2 px-6 rounded-t-lg text-gray-500" to="/"
