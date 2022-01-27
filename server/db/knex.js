@@ -6,5 +6,7 @@ const knex = require('knex')({
   useNullAsDefault: true
 });
 
+const { attachPaginate } = require('knex-paginate');
+attachPaginate();
 
 module.exports = knex;

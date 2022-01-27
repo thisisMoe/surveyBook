@@ -5,7 +5,7 @@ function createQuestion(qst) {
 }
 
 function getAllQuestions(survey_id) {
-  return knex('questions').where('survey_id', survey_id).select();
+  return knex('questions').where('survey_id', survey_id).select()
 }
 
 function getQuestion(id) {

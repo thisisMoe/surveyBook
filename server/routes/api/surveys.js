@@ -1,10 +1,11 @@
 const express = require('express');
 const Survey = require('../../db/Survey')
 const Question = require('../../db/Question')
-const Answer = require('../../db/Answer')
+const Answer = require('../../db/Answer');
 
 const router = express.Router();
 
+//Create survey
 router.post('/', async (req, res) => {
   const results = await Survey.createSurvey(req.body);
   res.status(201).json({
@@ -12,11 +13,13 @@ router.post('/', async (req, res) => {
   })
 });
 
+//Get all surveys
 router.get('/', async (req, res) => {
   const results = await Survey.getAllSurveys();
   res.status(200).json(results);
 });
 
+//Get survey by id
 router.get('/:id', async (req, res) => {
   const result = await Survey.getSurvey(req.params.id)
   if (!result.length) {
@@ -25,11 +28,13 @@ router.get('/:id', async (req, res) => {
   res.status(200).json(result);
 });
 
+//Update Survey
 router.patch('/:id', async (req, res) => {
   const result = await Survey.updateSurvey(req.params.id, req.body);
   res.status(204).json(result);
 });
 
+//Delete Survey
 router.delete('/:id', async (req, res) => {
   const result = await Survey.deleteSurvey(req.params.id);
   res.status(204).json(result);
@@ -41,33 +46,15 @@ router.get('/:survey_id/questions', async (req, res) => {
   res.status(200).json(results)
 });
 
-//Get Questions by id
+//Get Question by id
 router.get('/:survey_id/questions/:id', async (req, res) => {
   const result = await Question.getQuestion(req.params.id);
   res.status(200).json(result)
 });
 
-//Create question
-router.post('/:survey_id/questions', async (req, res) => {
-  Survey.getSurvey(req.params.survey_id).then((result) => {
-    if (!result.length) {
-      return res.sendStatus(404)
-    }
-    Question.createQuestion({
-      text: req.body.text,
-      yes: 0,
-      no: 0,
-      survey_id: result[0].id
-    }).then(result => {
-      return res.sendStatus(201)
-    })
-  })
-});
-
 //Create questions
 router.post('/:survey_id/questions/multiple', async (req, res) => {
   const questions = req.body.questions;
-  // return res.json(questions)
   Survey.getSurvey(req.params.survey_id).then((result) => {
     if (!result.length) {
       return res.sendStatus(404)
@@ -75,8 +62,6 @@ router.post('/:survey_id/questions/multiple', async (req, res) => {
     const data = questions.map(qst => {
       return {
         text: qst,
-        yes: 0,
-        no: 0,
         survey_id: result[0].id
       }
     })
@@ -100,22 +85,23 @@ router.patch('/:survey_id/questions/:id', async (req, res) => {
 })
 
 //Submit Answers
-router.patch('/:id/submit', (req, res) => {
-  Survey.getSurvey(req.params.id).then(async result => {
-    if (!result.length) {
-      return res.sendStatus(404);
+router.post('/submit', (req, res) => {
+  const answers = req.body.answers
+
+  const data = answers.map(e => {
+    return {
+      question_id: e.question_id,
+      answer: e.answer
     }
-    result[0].passed++
-    const survey = await Survey.updateSurvey(result[0].id, result[0]);
-
-    Answer.createAnswer(req.body.answers).then(result => {
-      res.sendStatus(201);
-    });
-
   })
-})
 
-router.get('/:survey_id/questions/:id/answers',async (req,res)=> {
+  Answer.createAnswer(data).then(result => {
+    res.sendStatus(201);
+  });
+});
+
+//Get All Answers
+router.get('/:survey_id/questions/:id/answers', async (req, res) => {
   const results = await Answer.getAllAnswers(req.params.id);
   res.json(results);
 })

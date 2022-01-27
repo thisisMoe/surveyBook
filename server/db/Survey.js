@@ -5,7 +5,7 @@ function createSurvey(survey) {
 }
 
 function getAllSurveys() {
-  return knex('surveys').select('*');
+  return knex('surveys').select('*')
 }
 
 function getSurvey(id) {

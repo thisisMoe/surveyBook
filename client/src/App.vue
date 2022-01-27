@@ -1,28 +1,22 @@
 <template>
-  <div class="px-4 pt-4 h-screen">
-    <h1 class="text-5xl mb-10">Survey Book</h1>
-    <div class="border-b-2">
-      <div class="flex cursor-pointer justify-center gap-4">
-        <div class="py-2 px-6 bg-white rounded-t-lg">Surveys</div>
-        <div class="py-2 px-6 rounded-t-lg text-gray-500">
-          Create Survey
+  <div class="px-6 md:px-10 pt-4 h-full">
+    <h1 class="text-5xl mb-16 mt-8">Survey Book</h1>
+
+    <div id="nav">
+      <div class="border-b-2">
+        <div class="flex cursor-pointer justify-center gap-4">
+          <router-link active-class="bg-white text-gray-700" class="py-2 px-6 rounded-t-lg text-gray-500" to="/"
+            >Surveys</router-link
+          >
+          <router-link active-class="bg-white text-gray-700" class="py-2 px-6 rounded-t-lg text-gray-500" to="/create"
+            >Create Survey</router-link
+          >
         </div>
       </div>
     </div>
-    <SurveyCardComponent msg="Welcome to Your Vue.js App" />
+    <router-view />
   </div>
 </template>
-
-<script>
-import SurveyCardComponent from "./components/SurveyCardComponent.vue";
-
-export default {
-  name: "App",
-  components: {
-    SurveyCardComponent,
-  },
-};
-</script>
 
 <style>
 #app {
@@ -32,5 +26,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   background-color: #f3f4f6;
+  height: 100vh;
 }
 </style>
