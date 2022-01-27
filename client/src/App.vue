@@ -26,6 +26,7 @@
   text-align: center;
   color: #2c3e50;
   background-color: #f3f4f6;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
 }
 </style>
