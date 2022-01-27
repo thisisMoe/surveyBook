@@ -1,5 +1,5 @@
 <template>
-  <div class="px-6 md:px-10 pt-4 h-full">
+  <div class="px-6 md:px-10 pb-10 pt-4 h-full">
     <h1 class="text-5xl mb-16 mt-8">Survey Book</h1>
 
     <div id="nav">

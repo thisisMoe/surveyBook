@@ -1,7 +1,10 @@
 <template>
   <div>
-    <div v-if="survey" class="text-3xl text-gray-500 mt-8 mb-6">
+    <div v-if="survey" class="text-3xl text-gray-500 mt-8 mb-3">
       {{ survey.title }}
+    </div>
+    <div v-if="survey" class="mb-6 text-gray-500">
+      {{ survey.description }}
     </div>
     <!-- <div
       v-for="question in questions"
@@ -27,14 +30,18 @@
         <div class="text-red-500">No</div>
       </div>
     </div> -->
-    <question-result v-for="question in questions" :key="question.id" :question="question"></question-result>
+    <question-result
+      v-for="question in questions"
+      :key="question.id"
+      :question="question"
+    ></question-result>
   </div>
 </template>
 
 <script>
 import QuestionService from "../QuestionService";
 import SurveyService from "../SurveyService";
-import QuestionResult from '../components/QuestionResult.vue';
+import QuestionResult from "../components/QuestionResult.vue";
 
 export default {
   components: { QuestionResult },
@@ -52,21 +59,6 @@ export default {
       this.survey = result;
       QuestionService.getQuestions(this.id).then((result) => {
         this.questions = result;
-        // this.questions.forEach((question) => {
-        //   var newAnswer = { yes: 0, no: 0 };
-
-        //   AnswerService.getAnswers(this.id, question.id).then((result) => {
-        //     result.forEach((answer) => {
-        //       if (answer.answer == 1) {
-        //         newAnswer.yes++;
-        //       } else if (answer.answer == 0) {
-        //         newAnswer.no++;
-        //       }
-        //     });
-        //   });
-
-        //   this.answersData.push({ ...newAnswer });
-        // });
       });
     });
   },

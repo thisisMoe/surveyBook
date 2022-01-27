@@ -15,6 +15,9 @@
     >
       <div class="block mb-2">
         <div class="text-2xl mb-3 mt-2 text-gray-500">Create Survey</div>
+        <div v-if="error" class="my-4 text-red-500 text">
+          {{ error }}
+        </div>
         <textarea
           type="text"
           placeholder="Survey Title (Think something catchy!!)"
@@ -183,6 +186,7 @@ export default {
       surveyTitle: "",
       description: "",
       questionsInput: [{ text: "" }],
+      error: null
     };
   },
   methods: {
@@ -195,6 +199,9 @@ export default {
       this.questionsInput.push({ text: "" });
     },
     createSurvey() {
+      if(!this.surveyTitle || !this.questionsInput[0].text) {
+        return this.error = "You forgot to set a title and questions for your survey"
+      }
       SurveyService.createSurvey(this.surveyTitle, this.description)
         .then((result) => {
           QuestionService.createQuestions(result.id, this.questionsList)

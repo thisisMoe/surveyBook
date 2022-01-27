@@ -16,7 +16,7 @@
     <div class="bg-red-400 w-full" style="height: 20px">
       <div class="bg-green-400 h-full" :style="{ width: `${(answers.yes / (answers.yes+answers.no))*100}%` }"></div>
     </div>
-    <div class="flex justify-between">
+    <div class="flex justify-between my-2">
       <div class="text-green-500">Yes ({{ answers.yes }})</div>
       <div class="text-red-500">No ({{answers.no}})</div>
     </div>
@@ -48,6 +48,3 @@ export default {
   methods: {},
 };
 </script>
-
-<style>
-</style>

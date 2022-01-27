@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:5000/api/surveys';
+const url = '/api/surveys';
 
 class AnswerService {
   //Get answers

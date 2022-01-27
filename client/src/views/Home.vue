@@ -19,8 +19,34 @@
         />
       </div>
     </div>
-    <div v-else>Loading...</div>
-    <div class="text-2xl mt-8" v-if="!surveys.length">No surveys found, Let's create a new Survey</div>
+    <div v-else>
+      <div
+        class="
+          fixed
+          top-0
+          right-0
+          h-screen
+          w-screen
+          z-50
+          flex
+          justify-center
+          items-center
+        "
+      >
+        <div
+          class="
+            animate-spin
+            rounded-full
+            h-32
+            w-32
+            border-t-2 border-b-2 border-blue-500
+          "
+        ></div>
+      </div>
+    </div>
+    <div class="text-2xl mt-8" v-if="!surveys.length && loaded == true">
+      No surveys found, Let's create a new Survey
+    </div>
   </div>
 </template>
 
@@ -45,7 +71,6 @@ export default {
     SurveyService.getSurveys()
       .then((result) => {
         this.surveys = result;
-        console.log(this.surveys);
         this.loaded = true;
       })
       .catch((e) => (this.error = e));

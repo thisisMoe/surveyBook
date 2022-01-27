@@ -1,7 +1,10 @@
 <template>
   <div v-if="loaded">
-    <div class="text-3xl text-gray-500 mt-8 mb-6">
+    <div class="text-3xl text-gray-500 mt-8 mb-3">
       {{ survey.title }}
+    </div>
+    <div class="mb-6 text-gray-500">
+      {{ survey.description }}
     </div>
     <div
       v-for="question in questions"
@@ -118,7 +121,31 @@
       </svg>
     </button>
   </div>
-  <div v-else>Loading...</div>
+  <div v-else>
+    <div
+      class="
+        fixed
+        top-0
+        right-0
+        h-screen
+        w-screen
+        z-50
+        flex
+        justify-center
+        items-center
+      "
+    >
+      <div
+        class="
+          animate-spin
+          rounded-full
+          h-32
+          w-32
+          border-t-2 border-b-2 border-blue-500
+        "
+      ></div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -178,7 +205,7 @@ export default {
     },
     submit() {
       SurveyService.submitAnswers(this.answers).then(() => {
-        router.push({ path: "/" });
+        router.push({ path: `/result/${this.id}` });
       });
     },
   },
