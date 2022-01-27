@@ -1,7 +1,7 @@
 # surveyBook
 
 ### How To run locally
-1. Clone repo: `git clone git@github.com:thisisMoe/surveyBook.git`
+1. Clone repo: `git clone https://github.com/thisisMoe/surveyBook.git`
 
 API:
 ```
