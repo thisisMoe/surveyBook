@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="loaded">
     <div v-if="survey" class="text-3xl text-gray-500 mt-8 mb-3">
       {{ survey.title }}
     </div>
@@ -36,6 +36,31 @@
       :question="question"
     ></question-result>
   </div>
+  <div v-else>
+    <div
+      class="
+        fixed
+        top-0
+        right-0
+        h-screen
+        w-screen
+        z-50
+        flex
+        justify-center
+        items-center
+      "
+    >
+      <div
+        class="
+          animate-spin
+          rounded-full
+          h-32
+          w-32
+          border-t-2 border-b-2 border-blue-500
+        "
+      ></div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -59,6 +84,7 @@ export default {
       this.survey = result;
       QuestionService.getQuestions(this.id).then((result) => {
         this.questions = result;
+        this.loaded = true;
       });
     });
   },
